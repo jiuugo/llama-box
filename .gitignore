@@ -1,0 +1,7 @@
+# Environment config containing local machine paths
+.env
+
+# OS / editor artifacts
+.DS_Store
+*.swp
+*~
