@@ -29,7 +29,10 @@ Edit `.env`:
 
 ```bash
 MODELS_PATH=/path/to/your/models
+LLAMA_API_KEY=NOAPIKEY
 ```
+
+Use the same API key in clients that connect to llama.cpp.
 
 ### 2. Start the server
 

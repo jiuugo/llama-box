@@ -33,6 +33,8 @@ services:
       - 0.0.0.0
       - --port
       - "8080"
+      - --api-key
+      - ${LLAMA_API_KEY:?Set LLAMA_API_KEY in .env}
       - --tools
       - all
 
