@@ -2,13 +2,13 @@
 
 This is my personal configuration and Docker Compose setup for running local LLMs with [`llama.cpp`](https://github.com/ggml-org/llama.cpp) server.
 
-It is tailored for an **AMD Radeon RX 9070 XT** running on **Linux** (tested on Fedora Linux), using the Vulkan container image and custom model presets.
+It is tailored for an **AMD Radeon RX 9070 XT** running on **Linux** (tested on Fedora Linux), using a Vulkan or ROCm container image and custom model presets.
 
 ---
 
 ## Features
 
-- **Vulkan GPU Acceleration**: Passes the AMD GPU devices to the container.
+- **AMD GPU Acceleration**: Select Vulkan or ROCm through `LLAMA_BACKEND`.
 - **Model Presets**: Pre-configured context sizes, quantization, KV cache settings, and vision/MTP draft specs in [`models.ini`](./models.ini).
 - **External Model Storage**: Keeps heavy GGUF files outside the git repository via a configurable `.env` file.
 - **SELinux Compatible**: Volume mounts configured with `:ro,Z` for Fedora/RHEL compatibility.
@@ -30,9 +30,12 @@ Edit `.env`:
 ```bash
 MODELS_PATH=/path/to/your/models
 LLAMA_API_KEY=NOAPIKEY
+LLAMA_BACKEND=vulkan
 ```
 
 Use the same API key in clients that connect to llama.cpp.
+
+To switch GPU backends, set `LLAMA_BACKEND` to `vulkan` or `rocm` in `.env` and run `docker compose up -d llama-server`. If the setting is omitted, Compose uses Vulkan.
 
 ### 2. Start the server
 

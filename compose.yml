@@ -1,7 +1,6 @@
 services:
   llama-server:
-    # image: ghcr.io/ggml-org/llama.cpp:server-rocm
-    image: ghcr.io/ggml-org/llama.cpp:server-vulkan
+    image: ghcr.io/ggml-org/llama.cpp:server-${LLAMA_BACKEND:-vulkan}
     container_name: llama-server
     restart: "no"
 
