@@ -2,13 +2,13 @@
 
 This is my personal configuration and Docker Compose setup for running local LLMs with [`llama.cpp`](https://github.com/ggml-org/llama.cpp) server.
 
-It is tailored for an **AMD Radeon RX 9070 XT** running on **Linux** (tested on Fedora Linux), using the ROCm-enabled container image and custom model presets.
+It is tailored for an **AMD Radeon RX 9070 XT** running on **Linux** (tested on Fedora Linux), using the Vulkan container image and custom model presets.
 
 ---
 
 ## Features
 
-- **ROCm GPU Acceleration**: Passes `/dev/kfd` and `/dev/dri` to the container for AMD Radeon acceleration.
+- **Vulkan GPU Acceleration**: Passes the AMD GPU devices to the container.
 - **Model Presets**: Pre-configured context sizes, quantization, KV cache settings, and vision/MTP draft specs in [`models.ini`](./models.ini).
 - **External Model Storage**: Keeps heavy GGUF files outside the git repository via a configurable `.env` file.
 - **SELinux Compatible**: Volume mounts configured with `:ro,Z` for Fedora/RHEL compatibility.
@@ -33,7 +33,16 @@ MODELS_PATH=/path/to/your/models
 
 ### 2. Start the server
 
+Create the shared Docker network once. It lets a separate Open WebUI project connect to llama.cpp.
+
 ```bash
+docker network create llama-inference
+```
+
+Then validate the configuration and start the server.
+
+```bash
+docker compose config --quiet
 docker compose up -d
 ```
 

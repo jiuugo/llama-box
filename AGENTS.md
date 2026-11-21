@@ -30,3 +30,7 @@ Use two-space indentation in YAML. Preserve the INI file's section dividers, sem
 ## Configuration Safety
 
 Keep machine-specific paths in `.env` and model weights outside Git. Preserve localhost port binding and read-only model mounts unless an intentional deployment change requires otherwise.
+
+## Commit Messages
+
+Always use simple Conventional Commit messages in the form `type: short imperative summary`, such as `chore: update model presets`.

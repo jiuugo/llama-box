@@ -1,6 +1,7 @@
 services:
   llama-server:
-    image: ghcr.io/ggml-org/llama.cpp:server-rocm
+    # image: ghcr.io/ggml-org/llama.cpp:server-rocm
+    image: ghcr.io/ggml-org/llama.cpp:server-vulkan
     container_name: llama-server
     restart: "no"
 
@@ -13,8 +14,11 @@ services:
 
     ipc: host
 
+    networks:
+      - inference
+
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
 
     volumes:
       - ${MODELS_PATH}:/models:ro,Z
@@ -31,3 +35,8 @@ services:
       - "8080"
       - --tools
       - all
+
+networks:
+  inference:
+    name: llama-inference
+    external: true
